@@ -20,7 +20,7 @@ namespace BertoniServices.Business
             {
                 HttpClientHelper apiRequest = new HttpClientHelper();
                 
-                var result = apiRequest.GetUnAuthorized("comments/phots/" + photoId).Result;
+                var result = apiRequest.GetUnAuthorized("comments/photo/" + photoId).Result;
 
                 var convertResult = JsonConvert.DeserializeObject<List<Comment>>(result);
 
