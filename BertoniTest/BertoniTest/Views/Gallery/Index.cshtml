@@ -15,36 +15,46 @@
         </button>
     </div>
 </div>
-<h4>Fotos</h4>
-<table id="photos-table" class="table">
-    <thead>
-        <tr>
-            <th>
-                Codigo
-            </th>
-            <th>
-                Titulo
-            </th>
-            <th>
-                Foto
-            </th>
-        </tr>
-    </thead>
-    <tbody>
 
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-    </tbody>
-</table>
-<h4>Comentarios</h4>
 <div class="row">
-    <div id="list-comments" class="list-comments">
+    <div class="col-md-8">
+        <h4>Fotos</h4>
+        <table id="photos-table" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Codigo
+                    </th>
+                    <th>
+                        Titulo
+                    </th>
+                    <th>
+                        Foto
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="photos-tbody">
 
+                <tr>
+                    <td>
+                        Cargando...
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <h4>Comentarios</h4>
+        <div class="row">
+            <div id="list-comments" class="list-comments">
+                Cargando...
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 
 @section Scripts {
@@ -56,8 +66,9 @@
             type: 'Get',
             success: function (data) {
                 if (data.photosResult !== "") {
+                    $('#photos-tbody').empty();
                     $(data.photosResult).each(function (index) {
-                        $('#photos-table tr:last').after('<tr><td>'+ this.id +'</td> <td>'+ this.title +'</td> <td>'+ this.path +'<br/><button class="btn btn-success show-coment" id="photo-'+ this.id +'" >Ver Comentarios</button> </td></tr>');
+                        $('#photos-tbody').append('<tr><td>'+ this.id +'</td> <td>'+ this.title +'</td> <td> <img  src="'+ this.thumbnailUrl +'" /><br/><button class="btn btn-success show-coment" id="photo-'+ this.id +'" >Ver Comentarios</button> </td></tr>');
                     });
                 }
             }
@@ -76,7 +87,7 @@
 
                 if (data.commentsResult !== "") {
                     $(data.commentsResult).each(function (index) {                        
-                        $('#list-comments').append('<div class"row">N° ' + this.id + ' comentario: ' + this.comment + '</div>');
+                        $('#list-comments').append('<div class"row">N°: ' + this.id + ' Nombre: ' + this.name + ' Comentario: ' + this.body + '</div><hr><br/>');
                     });
                 }
             }

@@ -10,7 +10,10 @@ namespace BertoniServices.Entities
         [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("name")]
+        [JsonProperty("userId")]
+        public int UserId { get; set; }
+
+        [JsonProperty("title")]
         public string Name { get; set; }
     }
 }

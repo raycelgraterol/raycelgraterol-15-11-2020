@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BertoniServices.Business
@@ -20,9 +21,12 @@ namespace BertoniServices.Business
             {
                 HttpClientHelper apiRequest = new HttpClientHelper();
                 
-                var result = apiRequest.GetUnAuthorized("photos/album/" + albumId).Result;
+                var result = apiRequest.GetUnAuthorized("photos").Result;
 
                 var convertResult = JsonConvert.DeserializeObject<List<Photo>>(result);
+
+
+                convertResult = convertResult.Where(x => x.AlbumId == albumId).ToList();
 
                 #region for test
                 /*

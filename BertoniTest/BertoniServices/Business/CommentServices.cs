@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BertoniServices.Business
@@ -20,9 +21,11 @@ namespace BertoniServices.Business
             {
                 HttpClientHelper apiRequest = new HttpClientHelper();
                 
-                var result = apiRequest.GetUnAuthorized("comments/photo/" + photoId).Result;
+                var result = apiRequest.GetUnAuthorized("comments").Result;
 
                 var convertResult = JsonConvert.DeserializeObject<List<Comment>>(result);
+
+                convertResult = convertResult.Where(x => x.PhotoId == photoId).ToList();
 
                 #region for test
                 /*
